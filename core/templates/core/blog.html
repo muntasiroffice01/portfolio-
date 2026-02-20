@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Insights &amp; Articles | Premium Portfolio{% endblock %}
+
+{% block content %}
+<main class="container" style="padding-top: 120px;">
+    <section class="reveal">
+        <h1 style="font-size: 3.5rem; margin-bottom: 1rem; letter-spacing: -2px;">Creative <span class="highlight">Insights</span></h1>
+        <p style="color: var(--text-secondary); font-size: 1.2rem; margin-bottom: 4rem; max-width: 600px;">Exploring the intersection of code, design, and technology.</p>
+
+        <div class="blog-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 3rem;">
+            {% for blog in blogs %}
+            <article class="glass reveal" style="padding: 1.5rem; display: flex; flex-direction: column; gap: 2rem; border-radius: 32px;">
+                {% if blog.image %}
+                <div style="width: 100%; height: 260px; border-radius: 20px; overflow: hidden;">
+                    <img src="{{ blog.image.url }}" alt="{{ blog.title }}" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                {% endif %}
+
+                <div style="padding: 0 1rem 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <span class="glass" style="padding: 0.35rem 1rem; border-radius: 50px; font-size: 0.75rem; color: var(--secondary); font-weight: 700; background: rgba(139, 92, 246, 0.1);">{{ blog.category }}</span>
+                        <span style="font-size: 0.85rem; color: var(--text-secondary);">{{ blog.created_at|date:"M d, Y" }}</span>
+                    </div>
+                    <h2 style="font-size: 1.85rem; margin-bottom: 1rem; color: white; line-height: 1.3;">{{ blog.title }}</h2>
+                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem;">{{ blog.short_description }}</p>
+
+                    <a href="{% url 'blog_detail' blog.slug %}" style="display: inline-flex; align-items: center; gap: 0.75rem; color: var(--primary); font-weight: 700; transition:0.3s;" class="read-more-btn">
+                        Keep Reading <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </article>
+            {% empty %}
+            <div class="glass" style="grid-column: 1 / -1; padding: 4rem; text-align: center;">
+                <p>Writing in progress...</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

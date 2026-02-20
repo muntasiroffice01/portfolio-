@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Start A Conversation | Premium Portfolio{% endblock %}
+
+{% block content %}
+<main class="container" style="padding-top: 120px;">
+    <section class="reveal" style="max-width: 1100px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;">
+            <div>
+                <h1 style="font-size: 3.5rem; margin-bottom: 1.5rem; letter-spacing: -2px;">Let's Build <span
+                        class="highlight">Something</span> Epic</h1>
+                <p style="color: var(--text-secondary); font-size: 1.25rem; margin-bottom: 3rem;">
+                    Whether you have a specific project in mind or just want to explore possibilities, I'm here to help
+                    you bridge the gap between idea and execution.
+                </p>
+
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="glass" style="padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem;">
+                        <div
+                            style="width: 50px; height: 50px; border-radius: 12px; background: rgba(45, 212, 191, 0.1); display: flex; align-items: center; justify-content: center; color: var(--primary);">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">Email me at</p>
+                            <p style="font-weight: 600;">muntasirashifee@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="glass" style="padding: 1.5rem; display: flex; align-items: center; gap: 1.5rem;">
+                        <div
+                            style="width: 50px; height: 50px; border-radius: 12px; background: rgba(139, 92, 246, 0.1); display: flex; align-items: center; justify-content: center; color: var(--secondary);">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <div>
+                            <p style="font-size: 0.8rem; color: var(--text-secondary);">Connect on</p>
+                            <p style="font-weight: 600;">LinkedIn</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass" style="padding: 4rem; border-radius: 40px;">
+                {% if success %}
+                <div style="text-align: center; padding: 2rem 0;">
+                    <div
+                        style="width: 80px; height: 80px; border-radius: 100px; background: rgba(45, 212, 191, 0.1); display: inline-flex; align-items: center; justify-content: center; color: var(--primary); margin-bottom: 1.5rem;">
+                        <i class="fas fa-check fa-2x"></i>
+                    </div>
+                    <h2 style="margin-bottom: 1rem;">Message Sent!</h2>
+                    <p style="color: var(--text-secondary);">I'll get back to you faster than a Flutter hot reload.</p>
+                    <button onclick="window.location.reload()" class="btn glass" style="margin-top: 2rem;">Send
+                        Another</button>
+                </div>
+                {% else %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div style="margin-bottom: 2rem;">
+                        <label
+                            style="display: block; margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">Full
+                            Name</label>
+                        <input type="text" name="name" required class="glass"
+                            style="width: 100%; padding: 1rem 1.5rem; border-radius: 16px; color: white; border: 1px solid var(--glass-border); outline: none;">
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <label
+                            style="display: block; margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">Email
+                            Address</label>
+                        <input type="email" name="email" required class="glass"
+                            style="width: 100%; padding: 1rem 1.5rem; border-radius: 16px; color: white; border: 1px solid var(--glass-border); outline: none;">
+                    </div>
+                    <div style="margin-bottom: 2.5rem;">
+                        <label
+                            style="display: block; margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--text-secondary);">Project
+                            Vision</label>
+                        <textarea name="message" rows="5" required class="glass"
+                            style="width: 100%; padding: 1.25rem 1.5rem; border-radius: 20px; color: white; border: 1px solid var(--glass-border); outline: none; resize: none;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.25rem;">Deploy
+                        Message</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

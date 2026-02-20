@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio | Modern Developer{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <a href="{% url 'home' %}" class="logo">{% if profile %}{{ profile.full_name|upper }}{% else %}PORTFOLIO{% endif %}</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'projects' %}">Projects</a></li>
+                <li><a href="{% url 'blog' %}">Blog</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <div class="footer-glow"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="{% url 'home' %}" class="footer-logo">{% if profile %}{{ profile.full_name|upper }}{% else %}PORTFOLIO{% endif %}</a>
+                    <p class="footer-tagline">{% if profile %}{{ profile.title }}{% else %}Building digital experiences with passion.{% endif %}</p>
+                    <div class="footer-socials">
+                        {% if profile.github_url %}<a href="{{ profile.github_url }}" target="_blank" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>{% endif %}
+                        {% if profile.linkedin_url %}<a href="{{ profile.linkedin_url }}" target="_blank" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>{% endif %}
+                        {% if profile.twitter_url %}<a href="{{ profile.twitter_url }}" target="_blank" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>{% endif %}
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'projects' %}">Projects</a></li>
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-col-title">Get In Touch</h4>
+                    <ul class="footer-links">
+                        <li><a href="{% url 'contact' %}">Send a Message</a></li>
+                        {% if profile.github_url %}<li><a href="{{ profile.github_url }}" target="_blank">GitHub Profile</a></li>{% endif %}
+                        {% if profile.linkedin_url %}<li><a href="{{ profile.linkedin_url }}" target="_blank">LinkedIn</a></li>{% endif %}
+                        {% if profile.cv_file %}<li><a href="{{ profile.cv_file.url }}" target="_blank">Download CV</a></li>{% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} {% if profile %}{{ profile.full_name }}{% else %}Portfolio{% endif %}. Crafted with &#x2764; and lots of caffeine.</p>
+                <p class="footer-tech">Keep Following & code with Muntasir Ashif</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'portfolio/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

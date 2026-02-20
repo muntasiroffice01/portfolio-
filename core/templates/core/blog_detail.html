@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}{{ blog.title }} | Insights{% endblock %}
+
+{% block content %}
+<main class="container" style="padding-top: 140px; padding-bottom: 5rem;">
+    <article class="reveal" style="max-width: 900px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 4rem;">
+            <span class="glass" style="padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.9rem; color: var(--secondary); font-weight: 700; background: rgba(139, 92, 246, 0.1);">{{ blog.category }}</span>
+            <h1 style="font-size: 4rem; margin: 1.5rem 0; letter-spacing: -2px; line-height: 1.1;">{{ blog.title }}</h1>
+            <p style="color: var(--text-secondary); font-size: 1.1rem;">Published on {{ blog.created_at|date:"F d, Y" }}</p>
+        </div>
+
+        {% if blog.image %}
+        <div class="glass" style="padding: 1rem; border-radius: 40px; margin-bottom: 4rem;">
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}" style="width: 100%; border-radius: 30px;">
+        </div>
+        {% endif %}
+
+        <div class="glass" style="padding: 4rem; border-radius: 40px; font-size: 1.2rem; line-height: 1.9; color: var(--text-secondary);">
+            {{ blog.content|linebreaks }}
+        </div>
+
+        <div style="margin-top: 4rem; text-align: center;">
+            <a href="{% url 'blog' %}" class="btn glass" style="display: inline-flex; align-items: center; gap: 0.75rem; padding: 1rem 2rem;">
+                <i class="fas fa-arrow-left"></i> All Articles
+            </a>
+        </div>
+    </article>
+</main>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Home | Modern Developer{% endblock %}
+
+{% block content %}
+<main class="hero-section">
+    <div class="container">
+        <div class="bento-grid">
+            <!-- Main Hero Card -->
+            <div class="bento-item glass item-main reveal">
+                <h1>Crafting <span class="highlight">Digital</span> Experiences</h1>
+                <p>Hi, I'm <strong style="color: white;">{% if profile %}{{ profile.full_name }}{% else %}Muntasir Ashif{% endif %}</strong>. {% if profile %}{{ profile.title }}{% else %}A Full-Stack Developer specialized in building robust backends and sleek, Flutter-inspired interfaces.{% endif %}</p>
+                <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                    <a href="{% url 'projects' %}" class="btn btn-primary">My Work</a>
+                    {% if profile.cv_file %}
+                    <a href="{{ profile.cv_file.url }}" class="btn glass" style="border-radius: 14px;" target="_blank">Download CV</a>
+                    {% else %}
+                    <a href="{% url 'contact' %}" class="btn glass" style="border-radius: 14px;">Let's Talk</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Skills Card -->
+            <div class="bento-item glass item-skills reveal" style="animation-delay: 0.2s;">
+                <h3 style="margin-bottom: 1.5rem; color: var(--secondary);">Tech Stack</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                    {% for tech in tech_list %}
+                    <span class="glass" style="padding: 0.45rem 1rem; border-radius: 50px; font-size: 0.85rem; border-color: var(--primary);">{{ tech }}</span>
+                    {% empty %}
+                    <span class="glass" style="padding: 0.45rem 1rem; border-radius: 50px; font-size: 0.85rem; border-color: var(--primary);">Python</span>
+                    <span class="glass" style="padding: 0.45rem 1rem; border-radius: 50px; font-size: 0.85rem; border-color: var(--secondary);">Django</span>
+                    <span class="glass" style="padding: 0.45rem 1rem; border-radius: 50px; font-size: 0.85rem; border-color: var(--accent);">Flutter</span>
+                    {% endfor %}
+                </div>
+                <div style="margin-top: 2rem;">
+                    <p style="font-size: 0.95rem; color: var(--text-secondary);">Building performant, cross-platform solutions with a focus on UX.</p>
+                </div>
+            </div>
+
+            <!-- Stats/CTA Card -->
+            <div class="bento-item glass item-cta reveal" style="animation-delay: 0.4s;">
+                <h2 style="font-size: 3rem; color: var(--primary); font-weight: 800;">{% if profile %}{{ profile.years_of_experience }}{% else %}5{% endif %}+</h2>
+                <p style="font-weight: 600;">Years of Impact</p>
+                <p style="font-size: 0.8rem; margin-top: 0.5rem;">Delivering premium web &amp; mobile products.</p>
+            </div>
+
+            <!-- Blog/Latest Card -->
+            <div class="bento-item glass item-stats reveal" style="animation-delay: 0.6s;">
+                <h3 style="font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--accent);">Latest Thinking</h3>
+                <p style="font-size: 0.9rem;">The future of Flutter in Web development...</p>
+                <a href="{% url 'blog' %}" style="color: var(--primary); font-weight: 700; font-size: 0.9rem; margin-top: 1.5rem; display: block; text-decoration: underline;">Read Insight &rarr;</a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

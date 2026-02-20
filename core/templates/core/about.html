@@ -1,0 +1,106 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}About Me | Premium Portfolio{% endblock %}
+
+{% block content %}
+<main class="container" style="padding-top: 120px;">
+    <section class="reveal">
+        <h2 style="font-size: 3.5rem; margin-bottom: 3rem; letter-spacing: -2px;">The <span
+                class="highlight">Developer</span> Behind The Code</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start;">
+            <div class="glass" style="padding: 1rem; overflow: hidden; border-radius: 30px;">
+                {% if profile.profile_image %}
+                <img src="{{ profile.profile_image.url }}" alt="{{ profile.full_name }}"
+                    style="width: 100%; border-radius: 20px; filter: grayscale(0.2);">
+                {% else %}
+                <img src="{% static 'portfolio/images/profile.jpg' %}" alt="Profile"
+                    style="width: 100%; border-radius: 20px; filter: grayscale(0.2);">
+                {% endif %}
+                <div style="padding: 1.5rem; text-align: center;">
+                    <h3 style="font-size: 1.5rem;">
+                        {% if profile %}
+                        {{ profile.full_name }}
+                        {% else %}
+                        Muntasir Ashif
+                        {% endif %}
+                    </h3>
+                    <p style="color: var(--primary); font-weight: 600;">
+                        {% if profile %}
+                        {{ profile.title }}
+                        {% else %}
+                        Flutter & Full-Stack
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass" style="padding: 3rem; border-radius: 30px;">
+                <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8;">
+                    {% if profile %}
+                    {{ profile.bio|linebreaksbr }}
+                    {% else %}
+                    I'm a digital craftsman with years of experience in building high-performance applications.
+                    {% endif %}
+                </p>
+                <p style="font-size: 1.1rem; color: var(--text-secondary);">
+                    My approach is simple: write clean, maintainable code and design interfaces that users actually
+                    enjoy using.
+                </p>
+
+                <div style="margin-top: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h4 style="margin-bottom: 1rem; color: var(--secondary);">Core Expertise</h4>
+                        <ul style="color: var(--text-secondary); list-style: circle; padding-left: 1.25rem;">
+                            {% for tech in tech_list %}
+                            <li>{{ tech }}</li>
+                            {% empty %}
+                            <li>Flutter & Dart</li>
+                            <li>Python & Django</li>
+                            <li>Responsive Web Design</li>
+                            <li>API Architecture</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 1rem; color: var(--accent);">Principles</h4>
+                        <ul style="color: var(--text-secondary); list-style: circle; padding-left: 1.25rem;">
+                            <li>Performance First</li>
+                            <li>Pixel Perfection</li>
+                            <li>Scalable Design</li>
+                            <li>User-Centric flow</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="margin-top: 8rem; margin-bottom: 8rem;" class="reveal">
+        <h2 style="font-size: 2.5rem; margin-bottom: 3rem;">Professional <span class="highlight">Journey</span></h2>
+        <div class="timeline">
+            {% for exp in experiences %}
+            <div class="glass reveal"
+                style="padding: 2.5rem; margin-bottom: 2rem; border-left: 4px solid var(--primary); border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                    <div>
+                        <h3 style="font-size: 1.5rem; color: white;">{{ exp.title }}</h3>
+                        <p style="color: var(--primary); font-weight: 600;">{{ exp.company }}</p>
+                    </div>
+                    <span class="glass"
+                        style="padding: 0.4rem 1.2rem; border-radius: 50px; font-size: 0.85rem; background: rgba(255,255,255,0.05);">
+                        {{ exp.duration }}
+                    </span>
+                </div>
+                <p style="color: var(--text-secondary); line-height: 1.7;">{{ exp.description }}</p>
+            </div>
+            {% empty %}
+            <div class="glass" style="padding: 2.5rem; text-align: center;">
+                <p>My journey is just beginning. Stay tuned for updates!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}
